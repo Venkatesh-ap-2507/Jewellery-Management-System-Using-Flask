@@ -1,0 +1,68 @@
+{% extends "homepage.html" %}
+{% block content %}
+<form method="post">
+ <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <tr><td><strong>Product Name</strong></td><td>{{ product[1] }}
+                    <input type="hidden" name="product_id" value="{{ product[0] }}"/>
+                </td></tr>
+                <tr><td><strong>Price</strong></td><td>{{ product[2] }}</td></tr>
+                <tr><td><strong>Description</strong></td><td>{{ product[3] }}</td></tr>
+                <tr><td><strong>Image</strong></td><td>
+                    <img src="{{ url_for('static', filename=product[4]) }}" 
+                         class="img-responsive" 
+                         style="max-width:300px; max-height:300px;" alt="Image">
+                </td></tr>
+                <tr><td><strong>Category</strong></td><td>{{ product[5] }}</td></tr>
+                <tr><td><strong>Quantity</strong></td><td>
+                    <select name="qty" class="form-control" style="width:80px;">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </td></tr>    
+                <tr>
+                    <td><button class="btn btn-success" id="addToWishlistBtn" data-productid="{{ product[0] }}"><span
+                            class="glyphicon glyphicon-heart"></span> Add to Wishlist</button></td>
+                    <td></td>
+                </tr>
+                <tr><td><button class="btn btn-danger form-control" type="submit">Add To Cart</button></td><td></td></tr>
+             </table>
+        </div>
+    </div>
+</div>
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var addToWishlistBtn = document.getElementById('addToWishlistBtn');
+        if (addToWishlistBtn) {
+            addToWishlistBtn.addEventListener('click', function (event) {
+                event.preventDefault();
+                var productId = addToWishlistBtn.getAttribute('data-productid');
+                addToWishlist(productId);
+            });
+        }
+
+        function addToWishlist(productId) {
+            fetch('/addToWishlist/' + productId, {
+                method: 'GET',
+                credentials: 'same-origin'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Product added to wishlist successfully.');
+                    } else {
+                        alert('Failed to add product to wishlist.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error adding product to wishlist:', error);
+                });
+        }
+    });
+</script>
+{% endblock %}

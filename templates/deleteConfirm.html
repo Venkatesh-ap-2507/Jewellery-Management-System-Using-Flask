@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Delete Category</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/back3.avif')}}");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4caf50;
+        }
+
+        hr {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 20px;
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Delete Category</h1>
+        <hr/>
+        <form method="post">
+            <table border="1">
+                <tr><td colspan="2">Are you sure you want to delete Category ?</td>
+                </tr>
+                <tr><td><input type="submit" value="Yes" name="action"/></td>
+                    <td><input type="submit" value="No" name="action"/></td></tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

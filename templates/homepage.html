@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Jewellery Website</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ 
+
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+    .carousel-inner img {
+        width: 100%; /* Set width to 100% */
+        height: auto; /* Maintain aspect ratio */
+        max-width: 900px; /* Set a maximum width for larger screens */
+        max-height: 500px; /* Set a maximum height to avoid stretching on smaller screens */
+        margin: auto;
+    }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+  .slider_section {
+    background-image: url('static/images/hero-bg.png'); /* Replace 'your-background-image.jpg' with the path to your background image */
+    background-size: cover;
+    background-position: center;
+  }
+  .small-image {
+    width: 200px; /* Set your desired width */
+    height: auto; /* Automatically adjust height while maintaining aspect ratio */
+  }
+  
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='images/logo.png')}}" height="30px" width="50px"/></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        {%if "uname" in session%}
+        <li class="active"><a href="/">Welcome {{session["uname"]}}</a></li>
+        <li><a href="/MyOrders">My Orders</a></li>
+        {%else%}
+        <li class="active"><a href="/">Jewellery Shop</a></li>
+        {%endif%}
+        <li class="active"><a href="/">Home</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Category
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            {% for cat in cats %}
+            <li><a href="/showproduct/{{ cat[0] }}">{{ cat[1] }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if "uname" in session %}
+        <li><a href="/Logout"><i class="fas fa-user"></i> Logout</a></li>
+        <li><a href="/viewWishlist"><i class="fas fa-heart"></i> WishList</a></li>
+        <li><a href="/ShowCart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+        {% else %}
+        <li><a href="/Login"><i class="fas fa-user"></i> Login</a></li>
+        <li><a href="/Register"><i class="fas fa-user"></i> Register</a></li>
+        {% endif %}
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+          <img src="{{ url_for('static', filename='images/hero-bg.png')}}" class="bottom-image" height="100px" width="800px">
+          <img src="{{ url_for('static', filename='images/slider-img.png')}}" class="top-image" height="100px" width="800px">
+          <div class="carousel-caption">
+              <h3>Welcome to our Online Store!</h3>
+              <p>Explore and buy the products that you need.</p>
+          </div>
+      </div>
+  </div>
+</div> -->
+<!-- slider section -->
+<section class="slider_section position-relative">
+  <div class="container">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="detail_box">
+                <h2><span>New Collection</span><hr></h2>
+                <h1>Jewellery</h1>
+                <p>We specialize in the finest quality jewellery repairs,
+                  remodelling, and custom designs. We take pride in offering a one-on-one, personalized design service that combines exceptional workmanship with meticulous attention to detaill.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="img-box">
+                <img src="{{ url_for('static', filename='images/slider-img.png') }}" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <br>
+  
+<div class="container">   
+  {%block content%} 
+    <div class="row">
+      {% for product in product %}
+      <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">{{product[1]}}</div>
+          <div class="panel-body">
+              <img src="{{ url_for('static', filename=product[4])}}" 
+               class="img-responsive" 
+               style="width:200px;height:200px" alt="Image"></div>
+          <div class="panel-footer">
+              Price : {{product[2]}} <br/>
+              Description : {{product[3]}} <br>
+              <a href="/ViewDetails/{{product[0]}}"class="btn btn-info">View Details</a>
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+    {%endblock %}
+  </div><br>
+
+ 
+  <footer class="container-fluid text-center">
+
+    <form class="form-inline">Jewellery Shop <br>
+      <a href="/adminLogin">Admin Login</a>
+    </form>
+  </footer>
+  
+</body>
+</html>

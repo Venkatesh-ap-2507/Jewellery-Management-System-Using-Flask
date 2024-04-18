@@ -1,0 +1,93 @@
+{% extends "homepage.html" %}
+{% block content %}
+<style>
+    /* Custom CSS for the login form */
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+    }
+
+    .alert-dismissible {
+        position: relative;
+        padding-right: 35px;
+        color: #31708f;
+    }
+
+    .alert-dismissible .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 15px;
+        color: inherit;
+    }
+
+    .form-table {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    .form-table input[type="text"],
+    .form-table input[type="password"],
+    .form-table input[type="email"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-table button {
+        background-color: #d9534f;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .form-table button:hover {
+        background-color: #c9302c;
+    }
+</style>
+
+<form method="post">
+    {% if message %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{ message }}</strong>
+    </div>
+    {% endif %}
+    <table class="form-table">
+        <h1 style="text-align: center;">Register</h1>
+        <tr>
+            <td>Login Id</td>
+            <td><input type="text" name="uname" required /></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="pwd" required /></td>
+        </tr>
+        <tr>
+            <td>Email Id</td>
+            <td><input type="email" name="email" required /></td>
+        </tr>
+        <tr>
+            <td><button class="button btn-danger form-control" type="submit" value="Login">Login</button></td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

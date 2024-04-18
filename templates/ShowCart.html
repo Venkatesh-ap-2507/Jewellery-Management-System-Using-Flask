@@ -1,0 +1,53 @@
+{%extends "homepage.html"%}
+{%block content%}
+<script type="text/javascript">
+    function increment(tid)
+    {
+        txtQty = document.getElementById(tid);
+        x = parseInt(txtQty.value);
+        if(x<5)
+        {
+            txtQty.value = x+1;
+        }
+        
+        //alert("Increment "+tid);
+    }
+    function decrement(tid)
+    {
+        txtQty = document.getElementById(tid);
+        x = parseInt(txtQty.value);
+        if(x>1)
+        {
+            txtQty.value = x-1;
+        }
+    }
+    
+</script>
+<h3>{{message}}</h3>
+
+ <table class="table">
+    <tr><th>Product Name</th><th>Price</th><th>Image</th><th>Quantity</th><th>Sub Total</th><th>Edit</th><th>Delete</th></tr>
+    {%for item in items%}
+    <form method="post">
+    <tr><td>{{item[1]}}
+        <input type="hidden" name="product_id" value="{{item[0]}}"/>
+    </td>
+        <td>{{item[2]}}</td>
+        <td><img src="{{ url_for('static', filename=item[3])}}" 
+            class="img-responsive" 
+            style="width:80px;height:80px" alt="Image"></td>
+    <td><button type="button" class="button btn-warning" onclick="decrement('qty{{item[0]}}')">-</button>
+        <input type="text" id="qty{{item[0]}}" value="{{item[4]}}" name="qty" size="3"/>
+        <button type="button" class="button btn-warning" onclick="increment('qty{{item[0]}}')">+</button></td>
+
+<td>{{item[7]}}</td>
+<td><button class="button btn-danger" type="submit" name="action" value="update"><span class="glyphicon glyphicon-pencil"></span></button></td> 
+<td><button class="button btn-success" type="submit" name="action" value="delete" ><span class="glyphicon glyphicon-trash"></span></button></td></tr>
+</form>    
+{%endfor%}
+ </table>
+
+ <hr/>
+ <h3>Grand Total = {{session["total"]}}</h3>
+ <a href="/MakePayment"><button class="button btn-danger">Make Payment</button></a>
+{%endblock%}

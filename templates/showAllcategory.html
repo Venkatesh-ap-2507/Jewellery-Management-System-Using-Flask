@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show All Categories</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/back2.jpg')}}");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        hr {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        a.edit, a.delete {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 2px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        a.edit {
+            background-color: #2196f3;
+            color: #fff;
+        }
+
+        a.delete {
+            background-color: #f44336;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Show All Categories</h1>
+        <a href="/addCategory">Add New Category</a>
+        <a href="/adminHome">Back to Admin Home Page</a>
+        <hr/>
+        <table border="1">
+            <tr>
+                <th>Category Id</th>
+                <th>Category Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            {% for cat in cats %}
+            <tr>
+                <td>{{ cat[0] }}</td>
+                <td>{{ cat[1] }}</td>
+                <td><a class="edit" href="/editCategory/{{ cat[0] }}">Edit</a></td>
+                <td><a class="delete" href="/deleteCategory/{{ cat[0] }}">Delete</a></td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

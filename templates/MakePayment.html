@@ -1,0 +1,13 @@
+{%extends "homepage.html"%}
+{%block content%}
+<form method="post">   
+ <table class="table">
+    <tr><td>Card No</td><td><input type="text" name="cardno" placeholder="Card No" required/></td></tr>
+    <tr><td>CVV</td><td><input type="text" name="cvv" required placeholder="CVV"/></td></tr>
+    <tr><td>Expiry</td><td><input type="text" name="expiry" placeholder="Expiry" required/></td></tr>
+    <tr><td>Total Amount </td>
+    <td><input type="text" name="total" value="{{session["total"]}}" readonly/></td></tr>
+    <tr><td><button class="button btn-danger form-control" type="submit">Make Payment</button></td><td></td></tr>
+ </table>
+</form>
+{%endblock%}

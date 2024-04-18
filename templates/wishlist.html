@@ -1,0 +1,25 @@
+{% extends "homepage.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Wishlist</h2>
+    <div class="row">
+        {% for item in wishlist %}
+        <div class="col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{ item[1] }}</div> <!-- Product Name -->
+                <div class="panel-body">
+                    <img src="{{ url_for('static', filename=item[4]) }}" class="img-responsive"
+                        style="width:200px;height:200px" alt="Image">
+                </div>
+                <div class="panel-footer">
+                    Price : {{ item[2] }} <br> <!-- Price -->
+                    Description : {{ item[3] }} <br> <!-- Description -->
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

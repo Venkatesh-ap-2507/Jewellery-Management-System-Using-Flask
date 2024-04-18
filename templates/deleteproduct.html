@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Category</title>
+    <style>
+        body {
+            background-color: #f9f6f2;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        hr {
+            border: 1px solid #ddd;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Delete Category</h1>
+        <hr/>
+        <form method="post">
+            <table>
+                <tr>
+                    <td colspan="2">Are you sure you want to delete this category?</td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Yes" name="action"/></td>
+                    <td><a href="{{ url_for('showAllproduct') }}"></a><input type="submit" value="No" name="action"/></td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</body>
+</html>
